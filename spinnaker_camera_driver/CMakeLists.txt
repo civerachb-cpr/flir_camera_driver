@@ -31,6 +31,7 @@ if(NOT Spinnaker_FOUND)
   message(STATUS "libSpinnaker not found in system library path")
   include(cmake/DownloadSpinnaker.cmake)
   download_spinnaker(Spinnaker_LIBRARIES Spinnaker_INCLUDE_DIRS)
+  find_package(Spinnaker QUIET)
 endif()
 
 message(STATUS "libSpinnaker library: ${Spinnaker_LIBRARIES}")
