@@ -98,7 +98,7 @@ ARCHS = {
         'current': '16.04',
         'type': 'deb',
         'shared_library': 'usr/lib/libSpinnaker.so.1.27.0.48',
-        'folder_name': 'spinnaker-1.27.0.48_armhf',
+        'folder_name': 'spinnaker-1.27.0.48-armhf',
         'debs': [
             'libspinnaker-1.27.0.48_armhf.deb',
             'libspinnaker-1.27.0.48_armhf-dev.deb',
@@ -122,7 +122,7 @@ ARCHS = {
         'future': '18.04',
         'type': 'deb',
         'shared_library': 'usr/lib/libSpinnaker.so.1.27.0.48',
-        'folder_name': 'spinnaker-1.27.0.48_arm64',
+        'folder_name': 'spinnaker-1.27.0.48-arm64',
         'debs': [
             'libspinnaker-1.27.0.48_arm64.deb',
             'libspinnaker-1.27.0.48_arm64-dev.deb',
