@@ -115,12 +115,22 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
 
   for (const std::string param : manufacturer_params_)
   {
-    Spinnaker::GenApi::CStringPtr string_ptr = static_cast<Spinnaker::GenApi::CStringPtr>(
-        spinnaker->readProperty(Spinnaker::GenICam::gcstring(param.c_str())));
-
     diagnostic_msgs::KeyValue kv;
+
+    // Sometimes the driver will throw a std::runtime_error when trying to read the diagnostic data
+    // Wrap the query in a generous try/catch block to prevent the nodelet from crashing
+    try
+    {
+      Spinnaker::GenApi::CStringPtr string_ptr = static_cast<Spinnaker::GenApi::CStringPtr>(
+          spinnaker->readProperty(Spinnaker::GenICam::gcstring(param.c_str())));
+      kv.value = string_ptr->GetValue(true);
+    }
+    catch (...)
+    {
+      kv.value = "Unknown";
+    }
+
     kv.key = param;
-    kv.value = string_ptr->GetValue(true);
     diag_manufacture_info.values.push_back(kv);
   }
 
