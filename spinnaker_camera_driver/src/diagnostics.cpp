@@ -127,7 +127,7 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
     }
     catch (...)
     {
-      ROS_WARN("Failed to read parameter %s", param.c_str())
+      ROS_WARN("Failed to read parameter %s", param.c_str());
       kv.value = "Unknown";
     }
 
@@ -150,7 +150,7 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
     }
     catch (...)
     {
-      ROS_WARN("Failed to read parameter %s", param.c_str())
+      ROS_WARN("Failed to read parameter %s", param.parameter_name);
       float_value = 0.0f;
     }
 
@@ -172,7 +172,7 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
     }
     catch (...)
     {
-      ROS_WARN("Failed to read parameter %s", param.c_str())
+      ROS_WARN("Failed to read parameter %s", param.parameter_name);
       int_value = 0;
     }
 
