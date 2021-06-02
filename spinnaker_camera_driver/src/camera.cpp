@@ -311,7 +311,7 @@ Spinnaker::GenApi::CNodePtr Camera::readProperty(const Spinnaker::GenICam::gcstr
   Spinnaker::GenApi::CNodePtr ptr = node_map_->GetNode(property_name);
   if (!Spinnaker::GenApi::IsAvailable(ptr) || !Spinnaker::GenApi::IsReadable(ptr))
   {
-    throw std::runtime_error("Unable to get parmeter " + property_name);
+    throw std::runtime_error("Unable to get parameter " + property_name);
   }
   return ptr;
 }

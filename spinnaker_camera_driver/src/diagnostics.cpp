@@ -139,10 +139,18 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
   // Float based parameters
   for (const diagnostic_params<float>& param : float_params_)
   {
-    Spinnaker::GenApi::CFloatPtr float_ptr =
-        static_cast<Spinnaker::GenApi::CFloatPtr>(spinnaker->readProperty(param.parameter_name));
+    float float_value;
+    try
+    {
+      Spinnaker::GenApi::CFloatPtr float_ptr =
+          static_cast<Spinnaker::GenApi::CFloatPtr>(spinnaker->readProperty(param.parameter_name));
 
-    float float_value = float_ptr->GetValue(true);
+      float_value = float_ptr->GetValue(true);
+    }
+    catch (...)
+    {
+      float_value = 0.0f;
+    }
 
     diagnostic_msgs::DiagnosticStatus diag_status = getDiagStatus(param, float_value);
     diag_array.status.push_back(diag_status);
@@ -151,10 +159,20 @@ void DiagnosticsManager::processDiagnostics(SpinnakerCamera* spinnaker)
   // Int based parameters
   for (const diagnostic_params<int>& param : integer_params_)
   {
-    Spinnaker::GenApi::CIntegerPtr integer_ptr =
-        static_cast<Spinnaker::GenApi::CIntegerPtr>(spinnaker->readProperty(param.parameter_name));
+    int int_value;
 
-    int int_value = integer_ptr->GetValue(true);
+    try
+    {
+      Spinnaker::GenApi::CIntegerPtr integer_ptr =
+          static_cast<Spinnaker::GenApi::CIntegerPtr>(spinnaker->readProperty(param.parameter_name));
+
+      int_value = integer_ptr->GetValue(true);
+    }
+    catch (...)
+    {
+      int_value = 0;
+    }
+    
     diagnostic_msgs::DiagnosticStatus diag_status = getDiagStatus(param, int_value);
     diag_array.status.push_back(diag_status);
   }
